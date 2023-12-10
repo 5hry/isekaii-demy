@@ -10,14 +10,17 @@
             <div class="col">
                 <div class="user-dashboard-box">
                     <div class="user-dashboard-sidebar">
+                        
                         <div class="user-box">
                             <img src="{% static user.avt_url %}" alt="" class="img-fluid">
+                            
                             <div class="name">
                                 <div class="name">
                                     {{ request.user.first_name }} {{ request.user.last_name }}
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="user-dashboard-menu">
                             <ul>
                                 <li id="profile-btn" class="active">

@@ -257,7 +257,7 @@
                         </div>
                     </div>
                     {% endfor %}
-                    <div class="bg-light p-2">
+                    <!-- <div class="bg-light p-2">
                         <div class="d-flex flex-row align-items-start"><img class="rounded-circle"
                                 src="{%static user.avt_url%}" width="40px" height="40px">
                                 <textarea class="form-control ml-1 shadow-none textarea"></textarea></div>
@@ -265,7 +265,52 @@
                                 type="button">Post comment</button><button
                                 class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
                         </div>
-                    </div>
+                    </div> -->
+                    <style>
+                        .your-rating input[type="radio"] {
+                            transform: scale(0.5);  /* Điều chỉnh kích thước của radio button */
+                            margin-right: 5px;  /* Tạo khoảng cách giữa các sao */
+                        }
+                    
+                        .your-rating label.full {
+                            background-size: 15px;  /* Điều chỉnh kích thước của sao được hiển thị */
+                        }
+                    
+                        /* Thêm các quy tắc CSS khác nếu cần thiết */
+                    </style>
+                    <form action="{% url 'courses:submit_rating' %}" method="post">
+                        {% csrf_token %}
+                        <div class="bg-light p-2">
+                            <div class="d-flex flex-row align-items-start">
+                                <img class="rounded-circle" src="{% static user.avt_url %}" width="40px" height="40px">
+                                <div class="ml-2 flex-grow-1">
+                                    <fieldset class="your-rating" style="display: inline-block; margin: 0;">
+                                        <input type="radio" id="star5" name="rating" value="5"/>
+                                        <label class="full" for="star5"></label>
+                    
+                                        <input type="radio" id="star4" name="rating" value="4"/>
+                                        <label class="full" for="star4"></label>
+                    
+                                        <input type="radio" id="star3" name="rating" value="3"/>
+                                        <label class="full" for="star3"></label>
+                    
+                                        <input type="radio" id="star2" name="rating" value="2"/>
+                                        <label class="full" for="star2"></label>
+                    
+                                        <input type="radio" id="star1" name="rating" value="1"/>
+                                        <label class="full" for="star1"></label>
+                                    </fieldset>
+                                    <textarea style="width: 600px;"class="form-control ml-1 shadow-none textarea" name="review"
+                                              placeholder="Describe your experience and what you got from this course"
+                                              maxlength="1000"></textarea>
+                                </div>
+                            </div>
+                            <div class="mt-2 text-right">
+                                <button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button>
+                                <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
                     
                 </div>
             </div>

@@ -93,3 +93,17 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["first_name", "last_name"]
+
+class AvatarUploadForm(forms.ModelForm):
+    avatar_file = forms.ImageField()
+
+    class Meta:
+        model = User
+        fields = ['avatar_file']
+
+    def save(self, commit=True):
+        instance = super(AvatarUploadForm, self).save(commit=False)
+        instance.avt_url = 'avatars/' + self.cleaned_data['avatar_file'].name
+        if commit:
+            instance.save()
+        return instance

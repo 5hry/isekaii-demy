@@ -12,20 +12,35 @@
                 <div class="home-banner-wrap" style="padding-left: 40px;">
                     <h3>Best place for learning coding</h3>
                     <p> Learning to make your new world</p>
-                    <form class="" action="{% url 'udemy:search' %}" method="get">
+                    <form class="" onsubmit="return validateForm()" action="{% url 'udemy:search' %}" method="get">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="q" placeholder="what do you want to learn?">
+                            <input type="text" class="form-control" name="q" id="searchInput" placeholder="what do you want to learn?">
                             <div class="input-group-append">
                                 <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                             </div>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>
     </div>
 </section>
 <script>
+    function validateForm() {
+        // Lấy giá trị từ trường nhập liệu
+        var inputValue = document.getElementById('searchInput').value;
+
+        // Kiểm tra xem trường nhập liệu có rỗng hay không
+        if (inputValue.trim() === '') {
+            // Ngăn chặn mặc định của form nếu trường rỗng
+            alert('Please enter a search term.');  // Hiển thị thông báo hoặc thực hiện hành động khác nếu muốn
+            return false;
+        }
+
+        // Cho phép thực hiện hành động của form nếu trường không rỗng
+        return true;
+    }
     document.addEventListener("DOMContentLoaded", function () {
         var backgrounds = ["bg-1", "bg-2"];
         var currentIndex = 0;

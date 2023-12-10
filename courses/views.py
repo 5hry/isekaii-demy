@@ -86,7 +86,7 @@ def submit_rating(request):
                 comment=request.POST.get('review')
             )
             rating.save()
-            return redirect('accounts:enrolled-courses')  # Thay 'success_page' bằng trang thành công của bạn
+            return redirect('courses:course-details ')
     else:
         form = RatingForm()
     return render(request, 'index.html', {'form': form})

@@ -20,7 +20,7 @@ body {
     padding-right: 0 !important;
     color: #29303b;
     font-size: 15px;
-    display: none;
+    /* display: none; */
 }
 
 body.white-bg {
@@ -1020,6 +1020,17 @@ input:focus {
     background-repeat: no-repeat;
     padding: 170px 0 130px;
     color: #fff;
+    transition: background 1s ease-in-out;
+}
+
+.bg-1 {
+    background-image: url('/static/images/bg.jpeg');
+    background-position: 0% 50%;
+}
+
+.bg-2 {
+    background-image: url('/static/images/learning1.jpg');
+    background-position: 100% 50%;
 }
 
 .home-banner-wrap {
@@ -1262,7 +1273,7 @@ input:focus {
 }
 
 .course-box .course-details {
-    padding: 15px 10px 0px 15px;
+    padding: 15px 10px 5px 15px;
     position: relative;
 }
 
@@ -3259,6 +3270,7 @@ section.my-courses-area {
 section.cart-list-area {
     margin-top: 50px;
     margin-bottom: 70px;
+    height: 300px;
 }
 
 .in-cart-box > .title,
@@ -3485,6 +3497,7 @@ section.cart-list-area {
 
 section.user-dashboard-area {
     padding: 40px 0;
+    height: 600px;
 }
 
 .user-dashboard-box {

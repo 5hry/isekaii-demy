@@ -10,7 +10,7 @@
             <div class="col">
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo site_url('home'); ?>"><i
+                        <li class="breadcrumb-item"><a href=""><i
                                     class="fas fa-home"></i></a></li>
                         <li class="breadcrumb-item active">
                             Search Results
@@ -36,8 +36,8 @@
                             <div class="course-box-2">
                                 <div class="course-image">
                                     <a href="{% url 'courses:course-details' course.slug %}">
-                                        <img src="https://traininglot.com/wp-content/uploads/2015/01/courses.png"
-                                            style="height: 250px; width: 250px" alt="" class="img-fluid">
+                                        <img style="width: 100%; height:200px" src="{% static course.thumbnail %}"
+                                            alt="" class="img-fluid">
                                     </a>
                                 </div>
                                 <div class="course-details">

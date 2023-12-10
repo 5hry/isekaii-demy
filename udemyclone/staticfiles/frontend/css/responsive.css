@@ -12,6 +12,9 @@
     menu resonsive for 768px+
 */
 @media (min-width:768px){
+    .inline-form{
+        width: 100%;
+    }
     .navbar-expand-lg {
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
@@ -25,7 +28,7 @@
         margin: 0 30px 0 22px;
     }
     .navbar .mobile-header-buttons{
-        /* display: none; */
+        display: none;
     }
 
     .main-nav-wrap{

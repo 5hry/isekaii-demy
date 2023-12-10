@@ -248,3 +248,16 @@ def change_password_view(request):
             messages.error(request, f'An error occurred: {str(e)}')
 
     return redirect(reverse_lazy("accounts:my-profile"))
+
+
+from .forms import AvatarUploadForm
+
+def upload_avatar(request):
+    if request.method == 'POST':
+        form = AvatarUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse_lazy("accounts:my-profile"))
+    else:
+        form = AvatarUploadForm()
+    return redirect(reverse_lazy("accounts:my-profile"), {'form': form})

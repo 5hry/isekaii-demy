@@ -3212,8 +3212,8 @@ section.my-courses-area {
 }
 
 .your-rating > label:before {
-    margin: 8px;
-    font-size: 40px;
+    margin: 3px;
+    font-size: 18px;
     font-family: "Font Awesome 5 Free";
     display: inline-block;
     content: "\f005";
