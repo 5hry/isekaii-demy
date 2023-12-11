@@ -2,7 +2,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.text import slugify
 from django.utils.timezone import now
-from django.db.models import Sum
+from django.db.models import Avg
 from django.core.validators import MinValueValidator
 from accounts.models import User
 from django.utils import timezone
@@ -44,7 +44,15 @@ class Course(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Course, self).save(*args, **kwargs)
-
+    def calculate_average_rating(self):
+        # Lấy tất cả các đánh giá liên kết với khóa ngoại là course
+        ratings = Rating.objects.filter(course=self)
+        
+        # Tính trung bình các giá trị rating nếu có ít nhất một đánh giá
+        average_rating = ratings.aggregate(Avg('rating'))['rating__avg']
+        
+        # Nếu không có đánh giá, mặc định là 5
+        return average_rating if average_rating is not None else 5
 
 class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons')

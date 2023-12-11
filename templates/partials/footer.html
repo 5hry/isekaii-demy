@@ -197,7 +197,7 @@
                 <div class="m-progress-bar">
                 </div>
             </div>
-            <form action="{% url 'courses:submit_rating' %}" method="post">
+            <form id="ratingForm" action="{% url 'courses:submit_rating' %}" method="post">
                 {% csrf_token %}
                 <div class="modal-body">
                     <div class="container-fluid">
@@ -240,14 +240,26 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary publish step step-1" data-step="1">Publish
+                    <button type="submit" class="btn btn-primary publish step step-1" data-step="1" onclick="validateAndSubmit()">Publish
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div><!-- Modal -->
+<script>
+    function validateAndSubmit() {
+        // Kiểm tra xem rating đã được chọn hay chưa
+        var rating = document.querySelector('input[name="rating"]:checked');
+        if (!rating) {
+            alert('Please select a rating.');
+            return;
+        }
 
+        // Nếu các điều kiện đều được đáp ứng, submit form
+        document.getElementById('ratingForm').submit();
+    }
+</script>
 <!-- Modal -->
 <div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">

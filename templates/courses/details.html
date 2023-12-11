@@ -92,7 +92,8 @@
                                     {% for lesson in course.lessons.all %}
                                     <li class="lecture has-preview">
                                         <span class="lecture-title">{{ lesson.title }}</span>
-                                        <span class="lecture-time float-right">{{ lesson.duration | floatformat:2}}</span>
+                                        <span class="lecture-time float-right">{{ lesson.duration |
+                                            floatformat:2}}</span>
                                         <span class="lecture-preview float-right" data-toggle="modal"
                                             data-target="#CoursePreviewModal">Preview</span>
                                     </li>
@@ -224,13 +225,14 @@
         <div class="d-flex justify-content-center row">
             <div class="col-md-8">
                 <div class="d-flex flex-column comment-section">
-
+                    
                     {% for rating in ratings %}
                     <div class="bg-white p-2">
                         <div class="d-flex flex-row user-info"><img class="rounded-circle"
                                 src="{% static rating.user.avt_url%}" width="40">
                             <div class="d-flex flex-column justify-content-start ml-2"><span
-                                    class="d-block font-weight-bold name">{{ rating.user.first_name}} {{rating.user.last_name}}</span><span class="date text-black-50">{{ rating.timestamp}}</span></div>
+                                    class="d-block font-weight-bold name">{{ rating.user.first_name}}
+                                    {{rating.user.last_name}}</span><span class="date text-black-50">{{rating.timestamp}}</span></div>
 
                             <div style="padding-top: 10px; padding-left: 10px;">{% for i in range %}
                                 {% if i <= rating.rating %} <i class="fas fa-star filled" style="color: #f5c85b;"></i>
@@ -243,20 +245,13 @@
                         </div>
 
                         <div class="mt-2">
-                            <p class="comment-text">{{rating.comment }}.</p>
-                        </div>
+                        {% if rating.comment %}
+                        <p class="comment-text">{{ rating.comment }}.</p>
+                        {% endif %}
                     </div>
-                    <div class="bg-white">
-                        <div class="d-flex flex-row fs-12">
-                            <div class="like p-2 cursor"><i class="fa-solid fa-thumbs-up"></i></i><span
-                                    class="ml-1">Like</span></div>
-                            <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span
-                                    class="ml-1">Comment</span></div>
-                            <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span>
-                            </div>
-                        </div>
                     </div>
                     {% endfor %}
+                    
                     <!-- <div class="bg-light p-2">
                         <div class="d-flex flex-row align-items-start"><img class="rounded-circle"
                                 src="{%static user.avt_url%}" width="40px" height="40px">
@@ -268,50 +263,72 @@
                     </div> -->
                     <style>
                         .your-rating input[type="radio"] {
-                            transform: scale(0.5);  /* Điều chỉnh kích thước của radio button */
-                            margin-right: 5px;  /* Tạo khoảng cách giữa các sao */
+                            transform: scale(0.5);
+                            /* Điều chỉnh kích thước của radio button */
+                            margin-right: 5px;
+                            /* Tạo khoảng cách giữa các sao */
                         }
-                    
+
                         .your-rating label.full {
-                            background-size: 15px;  /* Điều chỉnh kích thước của sao được hiển thị */
+                            background-size: 15px;
+                            /* Điều chỉnh kích thước của sao được hiển thị */
                         }
-                    
+
                         /* Thêm các quy tắc CSS khác nếu cần thiết */
                     </style>
-                    <form action="{% url 'courses:submit_rating' %}" method="post">
+                    {% if user.is_authenticated %}
+                    <form id="ratingForm" action="{% url 'courses:submit_rating' %}" method="post">
                         {% csrf_token %}
                         <div class="bg-light p-2">
                             <div class="d-flex flex-row align-items-start">
                                 <img class="rounded-circle" src="{% static user.avt_url %}" width="40px" height="40px">
                                 <div class="ml-2 flex-grow-1">
                                     <fieldset class="your-rating" style="display: inline-block; margin: 0;">
-                                        <input type="radio" id="star5" name="rating" value="5"/>
+                                        <input type="radio" id="star5" name="rating" value="5" />
                                         <label class="full" for="star5"></label>
-                    
-                                        <input type="radio" id="star4" name="rating" value="4"/>
+
+                                        <input type="radio" id="star4" name="rating" value="4" />
                                         <label class="full" for="star4"></label>
-                    
-                                        <input type="radio" id="star3" name="rating" value="3"/>
+
+                                        <input type="radio" id="star3" name="rating" value="3" />
                                         <label class="full" for="star3"></label>
-                    
-                                        <input type="radio" id="star2" name="rating" value="2"/>
+
+                                        <input type="radio" id="star2" name="rating" value="2" />
                                         <label class="full" for="star2"></label>
-                    
-                                        <input type="radio" id="star1" name="rating" value="1"/>
+
+                                        <input type="radio" id="star1" name="rating" value="1" />
                                         <label class="full" for="star1"></label>
                                     </fieldset>
-                                    <textarea style="width: 600px;"class="form-control ml-1 shadow-none textarea" name="review"
-                                              placeholder="Describe your experience and what you got from this course"
-                                              maxlength="1000"></textarea>
+                                    <input type="hidden" name="slug" id="course_id_for_rating" value="{{course.slug}}">
+                                    <textarea style="width: 600px;" class="form-control ml-1 shadow-none textarea"
+                                        name="review"
+                                        placeholder="Describe your experience and what you got from this course"
+                                        maxlength="1000"></textarea>
                                 </div>
                             </div>
                             <div class="mt-2 text-right">
-                                <button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button>
-                                <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
+                                <button class="btn btn-primary btn-sm shadow-none" onclick="validateAndSubmit()"
+                                    type="button">Post comment</button>
+                                <button class="btn btn-outline-primary btn-sm ml-1 shadow-none"
+                                    type="button">Cancel</button>
                             </div>
                         </div>
                     </form>
-                    
+                    {% endif %}
+                    <script>
+                        function validateAndSubmit() {
+                            // Kiểm tra xem rating đã được chọn hay chưa
+                            var rating = document.querySelector('input[name="rating"]:checked');
+                            if (!rating) {
+                                alert('Please select a rating.');
+                                return;
+                            }
+
+
+                            // Nếu các điều kiện đều được đáp ứng, submit form
+                            document.getElementById('ratingForm').submit();
+                        }
+                    </script>
                 </div>
             </div>
         </div>

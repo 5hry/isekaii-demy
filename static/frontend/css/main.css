@@ -1077,11 +1077,11 @@ input:focus {
 
 .home-fact-area {
     background-color: #ec5252;
-    background: -webkit-linear-gradient(-45deg, #ec5252, #6e1a52);
-    background: -moz-linear-gradient(-45deg, #ec5252 0, #6e1a52 100%);
-    background: -ms-linear-gradient(-45deg, #ec5252 0, #6e1a52 100%);
-    background: -o-linear-gradient(-45deg, #ec5252 0, #6e1a52 100%);
-    background: linear-gradient(-45deg, #ec5252, #6e1a52);
+    background: -webkit-linear-gradient(-45deg, #a31239, #2237b4);
+    background: -moz-linear-gradient(-45deg, #a31239 0, #2237b4 100%);
+    background: -ms-linear-gradient(-45deg, #a31239 0, #2237b4 100%);
+    background: -o-linear-gradient(-45deg, #a31239 0, #2237b4 100%);
+    background: linear-gradient(-45deg, #a31239, #2237b4);
     color: #fff;
     padding: 15px 0;
     margin-bottom: 50px
@@ -2090,7 +2090,7 @@ section.course-header-area {
 .what-you-get-box ul li {
     display: flex;
     margin-bottom: 10px;
-    width: 45%;
+    width: 80%;
     padding-left: 26px;
     font-size: 15px;
     position: relative;

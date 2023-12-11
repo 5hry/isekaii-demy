@@ -85,8 +85,9 @@ def submit_rating(request):
                 rating=request.POST.get('rating'),
                 comment=request.POST.get('review')
             )
+            print(request.POST.get('slug', ''))
             rating.save()
-            return redirect('courses:course-details ')
+            return redirect('courses:course-details', slug=request.POST.get('slug', ''))
     else:
         form = RatingForm()
     return render(request, 'index.html', {'form': form})
