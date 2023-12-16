@@ -36,6 +36,7 @@ def cart_checkout(request):
         course = cart['course']
         # course = get_object_or_404(Course, slug=course.slug)
         Enroll.objects.create(course=course, user_id=request.user.id)
+        Wishlist.objects.filter(user_id=request.user.id, course=course).delete()
     messages.success(request, 'Successfully checked out!')
     carts.clear()
     return redirect(reverse_lazy('cart:cart_detail'))

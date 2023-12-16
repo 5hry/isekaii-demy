@@ -33,6 +33,11 @@ def total_minutes(course):
 def is_enrolled(course, user):
     return course.enrolls.filter(user=user).exists()
 
+
+@register.filter(name='is_in_wishlist')
+def is_in_wishlist(course, user):
+    return course.wishlist.filter(user=user).exists()
+
 @register.filter(name='is_in_cart')
 def is_in_cart(request,course):
     cart = Cart(request)

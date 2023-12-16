@@ -10,7 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest
 from .form import RatingForm
 from .models import Rating
-
+from .models import Lesson, Note
+from .form import NoteForm
 
 class CourseDetailView(DetailView):
     model = Course

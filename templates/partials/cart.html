@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="icon">
-    <a href=""><i class="fas fa-shopping-cart"></i></a>
+    <a href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i></a>
     {% with total_items=cart|length %}
         {% if cart|length > 0 %}
             <span class="number">{{ cart|length }}</span>

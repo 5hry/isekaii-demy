@@ -59,14 +59,14 @@
             <div class="col-lg-3">
                 <div class="course-box-wrap" >
                     <div class="course-box">
-                        <a href="">
+                        <a href="{% url 'courses:course-details' wish.course.slug %}">
                             <div class="course-image">
                                 <img style="width: 100%;height: 200px;" src="{% static wish.course.thumbnail %}" alt="" class="img-fluid">
                                 <span class="play-btn"></span>
                             </div>
                         </a>
                         <div class="course-details">
-                            <a href="">
+                            <a href="{% url 'courses:course-details' wish.course.slug %}">
                                 <h5 class="title" style="margin-bottom: 10px;">{{ wish.course.title }}</h5>
                             </a>
                         </div>

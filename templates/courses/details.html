@@ -276,7 +276,7 @@
 
                         /* Thêm các quy tắc CSS khác nếu cần thiết */
                     </style>
-                    {% if user.is_authenticated %}
+                    {% if is_enrolled %}
                     <form id="ratingForm" action="{% url 'courses:submit_rating' %}" method="post">
                         {% csrf_token %}
                         <div class="bg-light p-2">

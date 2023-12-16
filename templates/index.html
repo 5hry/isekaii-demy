@@ -5,36 +5,37 @@
 
 {% block content %}
 {% load total_minutes %}
-<section class="home-banner-area bg-1" >
+<section class="home-banner-area bg-1">
     <div class="container-lg">
         <div class="row">
             <div class="col">
                 <div class="home-banner-wrap" style="padding-left: 40px;">
                     <h3>Best place for learning coding</h3>
                     <p> Learning to make your new world</p>
-                    <form class="" onsubmit="return validateForm()" action="{% url 'udemy:search' %}" method="get">
+                    <form class="" onsubmit="return validateForm11()" action="{% url 'udemy:search' %}" method="get">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="q" id="searchInput" placeholder="what do you want to learn?">
+                            <input type="text" class="form-control" name="q" id="searchInput1"
+                                placeholder="what do you want to learn?">
                             <div class="input-group-append">
                                 <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                             </div>
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
         </div>
     </div>
 </section>
 <script>
-    function validateForm() {
+    function validateForm11() {
         // Lấy giá trị từ trường nhập liệu
-        var inputValue = document.getElementById('searchInput').value;
-
+        var inputValue = document.getElementById('searchInput1').value;
+        console.log(22222222);
         // Kiểm tra xem trường nhập liệu có rỗng hay không
         if (inputValue.trim() === '') {
             // Ngăn chặn mặc định của form nếu trường rỗng
-            alert('Please enter a search term.');  // Hiển thị thông báo hoặc thực hiện hành động khác nếu muốn
+            alert('Please enter a search term.11111111111');  // Hiển thị thông báo hoặc thực hiện hành động khác nếu muốn
             return false;
         }
 
@@ -195,10 +196,18 @@
                                         <input type="hidden" value="" name="name">
                                         <input type="hidden" value="" name="price">
                                         <input type="hidden" value="1" name="quantity">
-
-                                        <button type="submit" class="wishlist-btn" title="Add to wishlist" id="1"><i
-                                                class="fas fa-heart filled"></i>
+                                        {% if not top_course|is_enrolled:user %}
+                                        {% if top_course|is_in_wishlist:user %}
+                                        <button type="submit" class="wishlist-btn" title="Add to wishlist" id="1">
+                                            <i class="fas fa-heart text-danger"></i>
                                         </button>
+                                        {% else %}
+                                        <button type="submit" class="wishlist-btn" title="Add to wishlist" id="1">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        {% endif %}
+                                        {% endif %}
+
                                     </form>
 
                                 </div>

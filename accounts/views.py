@@ -7,12 +7,14 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, FormView, RedirectView, ListView, DetailView, UpdateView
 
-from courses.models import Category, Lesson, Course
+from courses.models import Category, Lesson, Course, Note
+from courses.form import NoteForm
 from udemy.models import Enroll, Wishlist
 from .models import User
 from .forms import UserRegistrationForm, UserLoginForm, ProfileUpdateForm
-
-
+# from co.models import Note
+# from .forms import NoteForm
+from django.views.decorators.csrf import csrf_exempt
 class RegisterView(CreateView):
     model = User
     form_class = UserRegistrationForm
@@ -109,7 +111,6 @@ class EnrolledCoursesListView(ListView):
 class WishlistCoursesListView(ListView):
     model = Wishlist
     template_name = 'courses/wishlist_courses.html'
-    context_object_name_old = 'enrolls'
     context_object_name = 'wishlist'
 
     @method_decorator(login_required(login_url=reverse_lazy('accounts:login')))
@@ -154,10 +155,40 @@ class StartLessonView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         course = get_object_or_404(Course, slug=self.kwargs["slug"])
-        context["lessons"] = self.model.objects.filter(course=course)
-        context["course"] = course
-        return context
+        lessons = self.model.objects.filter(course=course)
+        notes = Note.objects.filter(lesson__in=lessons)
 
+        context["lessons"] = lessons
+        context["course"] = course
+        context["notes"] = "123"
+        return context
+    def get(self, request, slug):
+        course = get_object_or_404(Course, slug=slug)
+        lessons = Lesson.objects.filter(course=course)
+        notes = Note.objects.filter(lesson__in=lessons)
+        context = {'course': course, 'lessons': lessons, 'notes': "123"}
+        return render(request, self.template_name, context)
+
+@csrf_exempt
+def save_note(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            lesson_id = data['lesson_id']
+            content = data['content']
+
+            lesson = Lesson.objects.get(pk=lesson_id)
+            note, created = Note.objects.get_or_create(lesson=lesson)
+            note.content = content
+            note.save()
+
+            # Trả về response rỗng
+            return redirect(reverse_lazy("accounts:my-profile"))
+
+        except Exception as e:
+            return redirect(reverse_lazy("accounts:my-profile"))
+
+    return redirect(reverse_lazy("accounts:my-profile"))
 
 class LessonView(DetailView):
     model = Lesson
@@ -249,3 +280,25 @@ def change_password_view(request):
 
     return redirect(reverse_lazy("accounts:my-profile"))
 
+from django.http import JsonResponse
+import stripe
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
+stripe.api_key = 'your_stripe_secret_key'
+
+@csrf_exempt
+@require_POST
+def create_checkout_session(request):
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=[{
+            'price': 'your_price_id',  # Thay đổi thành ID của giá cả bạn muốn sử dụng
+            'quantity': 1,
+        }],
+        mode='payment',
+        success_url='https://your_domain.com/success/',  # Thay đổi thành URL thành công của bạn
+        cancel_url='https://your_domain.com/cancel/',  # Thay đổi thành URL hủy bỏ của bạn
+    )
+
+    return JsonResponse({'id': session.id})

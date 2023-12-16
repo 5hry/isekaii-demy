@@ -8,6 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '83e21k1f8kjn1a2=$x5i=7$=x0@!_c$54xxu^^n(u)3j_js-(k'
+STRIPE_PUBLIC_KEY = 'your_stripe_publishable_key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

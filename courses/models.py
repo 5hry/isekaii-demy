@@ -79,3 +79,9 @@ class Rating(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.course_slug}'
+
+
+class Note(models.Model):
+    lesson = models.OneToOneField(Lesson, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
