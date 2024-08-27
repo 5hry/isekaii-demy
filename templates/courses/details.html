@@ -228,7 +228,7 @@
                     {% for rating in ratings %}
                     <div class="bg-white p-2">
                         <div class="d-flex flex-row user-info"><img class="rounded-circle"
-                                src="{% static rating.user.avt_url%}" width="40">
+                                src="{{rating.user.avt_url.url}}" width="40">
                             <div class="d-flex flex-column justify-content-start ml-2"><span
                                     class="d-block font-weight-bold name">{{ rating.user.first_name}}
                                     {{rating.user.last_name}}</span><span class="date text-black-50">{{rating.timestamp}}</span></div>

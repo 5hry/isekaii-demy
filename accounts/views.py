@@ -156,39 +156,39 @@ class StartLessonView(DetailView):
         context = super().get_context_data(**kwargs)
         course = get_object_or_404(Course, slug=self.kwargs["slug"])
         lessons = self.model.objects.filter(course=course)
-        notes = Note.objects.filter(lesson__in=lessons)
+        # notes = Note.objects.filter(lesson__in=lessons)
 
         context["lessons"] = lessons
         context["course"] = course
-        context["notes"] = "123"
+        # context["notes"] = "123"
         return context
     def get(self, request, slug):
         course = get_object_or_404(Course, slug=slug)
         lessons = Lesson.objects.filter(course=course)
-        notes = Note.objects.filter(lesson__in=lessons)
-        context = {'course': course, 'lessons': lessons, 'notes': "123"}
+        # notes = Note.objects.filter(lesson__in=lessons)
+        context = {'course': course, 'lessons': lessons}
         return render(request, self.template_name, context)
 
-@csrf_exempt
-def save_note(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            lesson_id = data['lesson_id']
-            content = data['content']
+# @csrf_exempt
+# def save_note(request):
+#     if request.method == 'POST':
+#         try:
+#             data = json.loads(request.body)
+#             lesson_id = data['lesson_id']
+#             content = data['content']
 
-            lesson = Lesson.objects.get(pk=lesson_id)
-            note, created = Note.objects.get_or_create(lesson=lesson)
-            note.content = content
-            note.save()
+#             lesson = Lesson.objects.get(pk=lesson_id)
+#             note, created = Note.objects.get_or_create(lesson=lesson)
+#             note.content = content
+#             note.save()
 
-            # Trả về response rỗng
-            return redirect(reverse_lazy("accounts:my-profile"))
+#             # Trả về response rỗng
+#             return redirect(reverse_lazy("accounts:my-profile"))
 
-        except Exception as e:
-            return redirect(reverse_lazy("accounts:my-profile"))
+#         except Exception as e:
+#             return redirect(reverse_lazy("accounts:my-profile"))
 
-    return redirect(reverse_lazy("accounts:my-profile"))
+#     return redirect(reverse_lazy("accounts:my-profile"))
 
 class LessonView(DetailView):
     model = Lesson
