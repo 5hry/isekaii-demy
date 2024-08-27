@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<script src="{% static 'frontend/js/vendor/jquery-3.2.1.min.js'  %}"></script>
+<section class="page-header-area my-course-area">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="page-title">My Courses</h1>
+                <ul>
+                    <li class="active"><a href="">All courses</a></li>
+                    <li>
+                        <a href="{% url 'accounts:wishlist-courses' %}">Wish lists</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="my-courses-area">
+    <div class="container">
+        <div class="row align-items-baseline">
+            <div class="col-lg-6">
+                <div class="my-course-filter-bar filter-box">
+                    <span>Filter By</span>
+                    <div class="btn-group">
+                        <a class="btn btn-outline-secondary dropdown-toggle all-btn" href="#" data-toggle="dropdown">
+                            Categories
+                        </a>
+
+                        <div class="dropdown-menu">
+                            {% for category in categories %}
+                            <a class="dropdown-item" href="#" data-category="{{category.slug}}"
+                                id="">{{category.title}}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="btn-group">
+
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="my-course-search-bar">
+                    <form action="">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search my courses">
+                            <div class="input-group-append">
+                                <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row no-gutters" id="my_courses_area">
+            {% for enroll in enrolls %}
+
+            <div class="col-lg-3 course-box-wrap" data-category="{{enroll.course.category.slug}}">
+                <div class="course-box">
+                    <a href="">
+                        <div class="course-image">
+                            <img style="width: 100%; height: 200px;" src="{% static enroll.course.thumbnail %}" alt=""
+                                class="img-fluid">
+                            <span class="play-btn"></span>
+                        </div>
+                    </a>
+                    <div class="course-details">
+                        <a href="">
+                            <h5 class="title">{{ enroll.course.title }}</h5>
+                        </a>
+                        <div class="rating your-rating-box" data-toggle="modal" data-id="{{ enroll.course.slug }}"
+                            data-target="#EditRatingModal">
+
+                            <p class="your-rating-text" id="ratings">
+                                <span class="your">Your</span>
+                                <span class="edit">Edit</span>
+                                Rating
+                            </p>
+                        </div>
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            $(".rating").on("click", function () {
+                                // Lấy giá trị data-id từ phần tử được click
+                                var courseSlug = $(this).data("id");
+                                // Cập nhật giá trị của input trong modal
+                                $("#course_id_for_rating").val(courseSlug);
+                            });
+                            $(".dropdown-item").click(function () {
+                                // Lấy giá trị category từ thuộc tính data-category
+                                var category = $(this).data("category");
+
+                                // Ẩn tất cả các khoá học
+                                $(".course-box-wrap").hide();
+
+                                // Hiển thị các khoá học thuộc category được chọn
+                                $(".course-box-wrap[data-category='" + category + "']").show();
+                            });
+                        });
+                    </script>
+                    <div class="row" style="padding: 5px;">
+                        <div class="col-md-6">
+                            <a href="{% url 'courses:course-details' enroll.course.slug %}" class="btn">Course
+                                Details</a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{% url 'accounts:course-lessons' enroll.course.slug %}" class="btn">Start
+                                lesson</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

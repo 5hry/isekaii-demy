@@ -1,0 +1,376 @@
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<div style="max-width: 100%;" class="container p-0 m-0">
+
+    <!-- Footer -->
+    <footer
+            class="text-center text-lg-start text-white"
+            style="background-color: #1c2331"
+            >
+      <!-- Section: Social media -->
+      <section
+               class="d-flex justify-content-between p-4"
+               style="background-color: #6351ce;margin-top: 10px;"
+               >
+        <!-- Left -->
+        <div class="me-5" >
+          <span>Get connected with us on social networks:</span>
+        </div>
+        <!-- Left -->
+  
+        <!-- Right -->
+        <div>
+          <a href="" class="text-white me-4">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+        <!-- Right -->
+      </section>
+      <!-- Section: Social media -->
+  
+      <!-- Section: Links  -->
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <!-- Grid row -->
+          <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <!-- Content -->
+              <h6 class="text-uppercase fw-bold">ISEKAI</h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p>
+                Isekai, we are here to assist you. Learn, learn to create a new life!
+              </p>
+            </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold">Products</h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p>
+                <a href="#!" class="text-white">ISEKAI-demy</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">ISEKAI course</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">ISEKAI lesson</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">ISEKAIIIIIIi</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold">Useful links</h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p>
+                <a href="#!" class="text-white">Your Account</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">Become an Affiliate</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">Shipping Rates</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">Help</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold">Contact</h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p><i class="fas fa-home mr-3"></i> UIT, Ho Chi Minh, Viet Nam</p>
+              <p><i class="fas fa-envelope mr-3"></i> isekaii@gmail.com</p>
+              <p><i class="fas fa-phone mr-3"></i> +84 32 907 425</p>
+              <p><i class="fas fa-print mr-3"></i> +84 32 907 425</p>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+      </section>
+      <!-- Section: Links  -->
+  
+      <!-- Copyright -->
+      <div
+           class="text-center p-3"
+           style="background-color: rgba(0, 0, 0, 0.2)"
+           >
+        <a class="text-white" href="https://fb.com/stn.akai"
+           >isekaii@uit.edu.vn</a
+          >
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+  
+  </div>
+  <!-- End of .container -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content sign-in-modal">
+            <div class="modal-header">
+                <h5 class="modal-title">Login to your account!</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <span class="input-field-icon"><i class="fas fa-envelope"></i></span>
+                        <input type="email" name="email" class="form-control" placeholder="email">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-field-icon"><i class="fas fa-lock"></i></span>
+                        <input type="password" name="password" class="form-control" placeholder="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <div class="forgot-pass">
+                        <span>or</span>
+                        <a href="" data-toggle="modal" data-target="#forgotModal" data-dismiss="modal">Forgot
+                            password</a>
+                    </div>
+                </form>
+                <div class="account-have">
+                    Don't have an account? <a href="" data-toggle="modal" data-target="#signUpModal"
+                                              data-dismiss="modal">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- Modal -->
+
+<!-- Rating Modal -->
+<div class="modal fade multi-step" id="EditRatingModal" tabindex="-1" role="dialog" aria-hidden="true"
+     reset-on-close="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content edit-rating-modal">
+            <div class="modal-header">
+                <h5 class="modal-title">Write a comment</h5>
+
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="m-progress-bar-wrapper">
+                <div class="m-progress-bar">
+                </div>
+            </div>
+            <form id="ratingForm" action="{% url 'courses:submit_rating' %}" method="post">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="modal-rating-box">
+                                    <h4 class="rating-title">How would you rate this course overall?</h4>
+                                    <fieldset class="your-rating">
+
+                                        <input type="radio" id="star5" name="rating" value="5"/>
+                                        <label class="full" for="star5"></label>
+
+                                        <input type="radio" id="star4" name="rating" value="4"/>
+                                        <label class="full" for="star4"></label>
+
+                                        <input type="radio" id="star3" name="rating" value="3"/>
+                                        <label class="full" for="star3"></label>
+
+                                        <input type="radio" id="star2" name="rating" value="2"/>
+                                        <label class="full" for="star2"></label>
+
+                                        <input type="radio" id="star1" name="rating" value="1"/>
+                                        <label class="full" for="star1"></label>
+
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <input type="hidden" name="slug" id="course_id_for_rating" value="">
+                            <div class="col-md-6">
+                                <div class="modal-course-preview-box" >
+                                    <h4 class="rating-title">Write a review</h4>
+                                    <div class="card">
+                                            <textarea style="height: 200px;" id="review_of_a_course" name="review"
+                                              placeholder="Describe your experience what you got out from this course"
+                                              maxlength="1000" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary publish step step-1" data-step="1" onclick="validateAndSubmit()">Publish
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div><!-- Modal -->
+<script>
+    function validateAndSubmit() {
+        // Kiểm tra xem rating đã được chọn hay chưa
+        var rating = document.querySelector('input[name="rating"]:checked');
+        if (!rating) {
+            alert('Please select a rating.');
+            return;
+        }
+
+        // Nếu các điều kiện đều được đáp ứng, submit form
+        document.getElementById('ratingForm').submit();
+    }
+</script>
+<!-- Modal -->
+<div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content sign-in-modal">
+            <div class="modal-header">
+                <h5 class="modal-title">Forgot Password</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <div class="input-group">
+                        <input type="email" name="email" class="form-control forgot-email" placeholder="E-mail">
+                    </div>
+                    <div class="forgot-pass-btn">
+                        <button type="submit" class="btn btn-primary d-inline-block">Reset Password</button>
+                        <span>or</span>
+                        <a href="" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Log In</a>
+                    </div>
+                </form>
+                <div class="forgot-recaptcha">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content sign-in-modal">
+            <div class="modal-header">
+                <h5 class="modal-title">Sign Up And Start Learning!</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post">
+                    @csrf
+                    <div class="input-group">
+                        <span class="input-field-icon"><i class="fas fa-user"></i></span>
+                        <input type="text" name="first_name" class="form-control"
+                               placeholder="first name">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-field-icon"><i class="fas fa-user"></i></span>
+                        <input type="text" name="last_name" class="form-control"
+                               placeholder="last name">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-field-icon"><i class="fas fa-envelope"></i></span>
+                        <input type="email" name="email" class="form-control"
+                               placeholder="email">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-field-icon"><i class="fas fa-lock"></i></span>
+                        <input type="password" name="password" class="form-control"
+                               placeholder="password">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-field-icon"><i class="fas fa-lock"></i></span>
+                        <input type="password" name="password_confirmation" class="form-control"
+                               placeholder="Confirm password">
+                    </div>
+                    <div class="custom-control custom-checkbox deal-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="dealCheckbox">
+                        <label class="custom-control-label" for="dealCheckbox">
+                            Check Here For Exciting Deals And Personalized Course Recommendations
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign up</button>
+                </form>
+                <div class="agreement-text">
+                    By Signing Up You Agree To Our
+                    <a href="">Terms of use</a> and <a
+                        href="">Privacy Policy</a>.
+                </div>
+                <div class="account-have">
+                    Already have an account?
+                    <a href="" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- Modal -->
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content payment-in-modal">
+            <div class="modal-header">
+                <h5 class="modal-title">Checkout!</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="#" method="get">
+                            <input type="hidden" class="total_price_of_checking_out" name="total_price_of_checking_out"
+                                   value="">
+                            <button type="submit" class="btn btn-default paypal">
+                                Paypal
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- Modal -->

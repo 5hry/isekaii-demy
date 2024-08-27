@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<link>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/ISEKAII.svg' %}">
+    <title> Isekaii-demy</title>
+
+    {% include 'includes/header.html' %}
+</head>
+<body class="gray-bg">
+{% include 'includes/navbar.html' %}
+
+{% block content %}{% endblock %}
+
+<script src="{% static 'frontend/js/vendor/modernizr-3.5.0.min.js'  %}"></script>
+<script src="{% static 'frontend/js/vendor/jquery-3.2.1.min.js'  %}"></script>
+<script src="{% static 'frontend/js/popper.min.js'  %}"></script>
+<script src="{% static 'frontend/js/bootstrap.min.js'  %}"></script>
+<script src="{% static 'frontend/js/slick.min.js'  %}"></script>
+<script src="{% static 'frontend/js/select2.min.js'  %}"></script>
+<script src="{% static 'frontend/js/tinymce.min.js'  %}"></script>
+<script src="{% static 'frontend/js/multi-step-modal.js'  %}"></script>
+<script src="{% static 'frontend/js/jquery.webui-popover.min.js'  %}"></script>
+<script src="{% static 'frontend/js/main.js'  %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+
+{% include 'includes/footer.html' %} 
+</body>
+</html>

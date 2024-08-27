@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row" style="min-height: 900px;">
+      <script>
+        function toggleNoteForm() {
+            var lessonTable = document.getElementById('lessonTable');
+            var noteForm = document.getElementById('noteForm');
+            var toggleButton = document.getElementById('toggleButton');
+    
+            if (lessonTable.style.display === 'none' || lessonTable.style.display === '') {
+                lessonTable.style.display = 'block';
+                noteForm.style.display = 'none';
+                toggleButton.innerText = 'Show Note';
+            } else {
+                lessonTable.style.display = 'none';
+                noteForm.style.display = 'block';
+                toggleButton.innerText = 'Hide Note';
+            }
+        }
+    </script>
+    
+    <div class="col-lg-3">
+        <div class="accordion" id="accordionExample">
+            <div class="card" style="margin:10px 0;">
+    
+                <div id="lessonTable" class="collapse show" aria-labelledby="" data-parent="#accordionExample">
+                    <div class="card-body" style="padding:0;">
+                        <table style="width: 100%;">
+                            {% for lesson in lessons %}
+                            <tr style="width: 100%; padding: 5px 0px;">
+                                <td style="text-align: left;padding:10px; border-bottom:1px solid #ccc;">
+                                    <a href="{% url 'accounts:course-lessons-single' slug=course.slug id=lesson.id %}"
+                                        id="{{ lesson.id }}">
+                                        <i class="fa fa-play" style="font-size: 12px;color: #909090;padding: 10px;"></i>
+                                        {{ lesson.title }}
+                                    </a>
+                                </td>
+                                <td style=" padding:10px; border-bottom:1px solid #ccc;">
+                                    <span class="lesson_duration">
+                                        {{ lesson.duration | floatformat:0 }}m
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+    
+                <div id="noteForm" class="collapse" aria-labelledby="" data-parent="#accordionExample"
+                    style="display: none;">
+                    <div>
+                        {% csrf_token %}
+                        <textarea name="content" style="width: 100%; display: block; margin-bottom: 10px; min-height: 300px;">{{ lesson.note.content }}</textarea>
+                        <button class="btn" type="button" onclick="saveNote()">Save Note</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+        <div class="col-lg-9" id="video_player_area">
+            <div class="" style="background-color: #333;">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe width="80%" height="auto" class="embed-responsive-item" src="{{lesson.video_url}}"
+                        frameborder="0" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+          
+          
+    <button class="btn" type="button" id="toggleButton" onclick="toggleNoteForm()">Show Note</button>
+          <form id="noteForm" data-lesson-id="{{ lesson.id }}" style="display: none;">
+              {% csrf_token %}
+              <textarea name="content" style="width: 100%; display: block; margin-bottom: 10px; min-height: 300px;">{{ notes.content }}"123"At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.</textarea>
+              <button class="btn" type="button" onclick="saveNote()">Save Note</button>
+          </form>
+                  <script>
+                    function saveNote() {
+                      var lessonId = document.getElementById('noteForm').getAttribute('data-lesson-id');
+                      var content = document.querySelector('textarea[name="content"]').value;
+                
+                      // Gửi AJAX request đến endpoint để lưu note
+                      fetch('{% url "accounts:save_note" %}', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json',
+                          'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value,
+                        },
+                        body: JSON.stringify({
+                          lesson_id: lessonId,
+                          content: content,
+                        }),
+                      })
+                      .then(response => response.json())
+                      .then(data => {
+                        if (data.success) {
+                          alert('Note saved successfully!');
+                        } else {
+                          alert('Failed to save note.');
+                        }
+                      })
+                      .catch(error => {
+                        console.error('Error:', error);
+                      });
+                    }
+                  </script>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

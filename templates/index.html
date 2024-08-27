@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+{% load course_info %}
+<section class="home-banner-area bg-1">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col">
+                <div class="home-banner-wrap" style="padding-left: 40px;">
+                    <h3>Best place for learning coding</h3>
+                    <p> Learning to make your new world</p>
+                    <form class="" onsubmit="return validateForm11()" action="{% url 'account_courses:search' %}" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="q" id="searchInput1"
+                                placeholder="what do you want to learn?">
+                            <div class="input-group-append">
+                                <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function validateForm11() {
+        // Lấy giá trị từ trường nhập liệu
+        var inputValue = document.getElementById('searchInput1').value;
+        // Kiểm tra xem trường nhập liệu có rỗng hay không
+        if (inputValue.trim() === '') {
+            // Ngăn chặn mặc định của form nếu trường rỗng
+            alert('Please enter a search term.11111111111');  // Hiển thị thông báo hoặc thực hiện hành động khác nếu muốn
+            return false;
+        }
+
+        // Cho phép thực hiện hành động của form nếu trường không rỗng
+        return true;
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        var backgrounds = ["bg-1", "bg-2"];
+        var currentIndex = 0;
+
+        function changeBackground() {
+            var banner = document.querySelector(".home-banner-area");
+            currentIndex = (currentIndex + 1) % backgrounds.length;
+            banner.classList.remove(backgrounds[(currentIndex + 1) % backgrounds.length]);
+            banner.classList.add(backgrounds[currentIndex]);
+        }
+
+        setInterval(changeBackground, 5000); // Chuyển đổi mỗi 10 giây
+    });
+</script>
+<section class="home-fact-area">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-md-4 d-flex">
+                <div class="home-fact-box mr-md-auto ml-auto mr-auto">
+                    <i class="fas fa-bullseye float-left"></i>
+                    <div class="text-box">
+                        <h4>{{ courses.count }} online courses</h4>
+                        <p>Explore A Variety Of Fresh Topics</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 d-flex">
+                <div class="home-fact-box mr-md-auto ml-auto mr-auto">
+                    <i class="fa fa-check float-left"></i>
+                    <div class="text-box">
+                        <h4>Expert Instruction</h4>
+                        <p>Find The Right Course For You</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 d-flex">
+                <div class="home-fact-box mr-md-auto ml-auto mr-auto">
+                    <i class="fa fa-clock float-left"></i>
+                    <div class="text-box">
+                        <h4>Lifetime Access</h4>
+                        <p>Learn On Your Schedule</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="course-carousel-area">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col">
+                <h2 class="course-carousel-title">Top Courses</h2>
+                <div class="course-carousel">
+                    {% for top_course in top_courses %}
+
+                    <div class="course-box-wrap">
+                        <a href="{% url 'courses:course-details' top_course.slug %}" class="has-popover">
+                            <div class="course-box">
+                                <div class="course-badge position best-seller">Best seller</div>
+                                <div class="course-image">
+                                    <img style=" width: 100%; height: 200px" src="{% static top_course.thumbnail %}"
+                                        alt="" class="img-fluid">
+                                </div>
+                                <div class="course-details">
+                                    <h5 class="title">{{ top_course.title }}</h5>
+                                    <p class="instructors">{{ top_course.short_description }}</p>
+                                    <div class="rating" style="color: black;">
+                                        {% for i in range %}
+                                        {% if i <= top_course.rating %} <i class="fas fa-star filled"></i>
+                                            {% elif i|subtract_one < top_course.rating %} <i
+                                                class="fas fa-star-half-alt filled"></i>
+                                                {% else %}
+                                                <i class="fas fa-star"></i>
+                                                {% endif %}
+                                                {% endfor %}
+                                                <span class="d-inline-block average-rating">
+                                                    {{top_course.rating}}</span>
+                                    </div>
+                                    <p class="price text-right">
+                                        ${{ top_course.price | floatformat:2 | intcomma }}
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="webui-popover-content">
+                            <div class="course-popover-content">
+
+                                <div class="course-title">
+                                    <a href="#">{{ top_course.title }}</a>
+                                </div>
+                                <!-- <div class="course-category">
+                                            <span class="course-badge best-seller">Best seller</span>
+                                            in
+                                            <a href="">PHP</a>
+                                        </div> -->
+                                <div class="course-meta">
+                                    <span class=""><i class="fas fa-play-circle"></i>
+                                        {{ top_course.lessons.count }} Lessons
+                                    </span>
+                                    <span class=""><i class="far fa-clock"></i>
+                                        {% with total_minutes=top_course|minutes %}
+                                        {{ total_minutes.hours }}h {{ total_minutes.minutes }}m
+                                        {% endwith %}
+                                    </span>
+                                    <span class="">
+                                        <i class="fas fa-closed-captioning"></i>English
+                                    </span>
+                                </div>
+                                <div class="course-subtitle">{{ top_course.short_description }}</div>
+                                <div class="what-will-learn">
+                                    <ul>
+                                        {{ top_course.outcomes }}
+                                    </ul>
+                                </div>
+                                <div class="popover-btns">
+
+                                    {% if user.is_authenticated %}
+                                    {% if top_course|is_enrolled:user %}
+                                    <button class="btn enrolled-btn" type="button">Enrolled</button>
+                                    {% elif request|is_in_cart:top_course %}
+                                    <button class="btn addedToCart-btn big-cart-button-1" type="button">Added to
+                                        Cart</button>
+                                    {% else %}
+                                    <form action="{% url 'cart:cart_add' top_course.slug %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="" name="course_id">
+                                        <input type="hidden" value="" name="name">
+                                        <input type="hidden" value="" name="price">
+                                        <input type="hidden" value="1" name="quantity">
+                                        <button class="btn add-to-cart-btn big-cart-button-1" type="submit"
+                                            id="cart">Add to Cart</button>
+                                    </form>
+                                    {% endif %}
+                                    {% else %}
+                                    <form action="{% url 'cart:cart_add' top_course.slug %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="" name="course_id">
+                                        <input type="hidden" value="" name="name">
+                                        <input type="hidden" value="" name="price">
+                                        <input type="hidden" value="1" name="quantity">
+                                        <button class="btn add-to-cart-btn big-cart-button-1" type="submit"
+                                            id="cart">Add to Cart</button>
+                                    </form>
+                                    {% endif %}
+                                    <form action="{% url 'cart:add_to_wishlist' top_course.slug %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="" name="course_id">
+                                        <input type="hidden" value="" name="name">
+                                        <input type="hidden" value="" name="price">
+                                        <input type="hidden" value="1" name="quantity">
+                                        {% if not top_course|is_enrolled:user %}
+                                        {% if top_course|is_in_wishlist:user %}
+                                        <button type="submit" class="wishlist-btn" title="Add to wishlist" id="1">
+                                            <i class="fas fa-heart text-danger"></i>
+                                        </button>
+                                        {% else %}
+                                        <button type="submit" class="wishlist-btn" title="Add to wishlist" id="1">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        {% endif %}
+                                        {% endif %}
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
