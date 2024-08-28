@@ -280,7 +280,7 @@
                         {% csrf_token %}
                         <div class="bg-light p-2">
                             <div class="d-flex flex-row align-items-start">
-                                <img class="rounded-circle" src="{% static user.avt_url %}" width="40px" height="40px">
+                                <img class="rounded-circle" src="{{ user.avt_url.url}}" width="40px" height="40px">
                                 <div class="ml-2 flex-grow-1">
                                     <fieldset class="your-rating" style="display: inline-block; margin: 0;">
                                         <input type="radio" id="star5" name="rating" value="5" />
